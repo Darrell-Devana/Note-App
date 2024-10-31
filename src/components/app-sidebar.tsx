@@ -1,4 +1,4 @@
-import { Home, LogOut } from "lucide-react";
+import { Home, Clock4, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 
 import {
@@ -6,34 +6,46 @@ import {
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
+  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import ProfileHeader from "./ui/profile-header";
 
 // Menu items.
 const items = [
   {
-    title: "Dashboard",
+    title: "Home",
     url: "/",
     icon: Home,
   },
   {
-    title: "Sign out",
-    url: "/login",
-    icon: LogOut,
+    title: "Recent",
+    url: "/recent",
+    icon: Clock4,
+  },
+  {
+    title : "Starred",
+    url : "/starred",
+    icon : Star,
   },
 ];
 
 export function AppSidebar() {
   return (
     <Sidebar variant="floating" collapsible="icon">
+      <SidebarHeader>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton>
+              <ProfileHeader />
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className="text-lg font-bold">
-            Note-App
-          </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (

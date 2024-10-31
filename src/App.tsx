@@ -1,15 +1,17 @@
 import { Route, Routes } from "react-router-dom"
 import "./App.css"
 import Layout from "./components/layout"
-import Dashboard from "./pages/dashboard";
-import Login from "./pages/login";
+import Home from "./pages/home";
+import Recent from "./pages/recent";
+import Starred from "./pages/starred";
 
 function App() {
   return (
     <Layout>
       <Routes>
-        <Route path='/' element={ <Dashboard /> }></Route>
-        <Route path='/login' element={ <Login /> }></Route>
+        <Route path='/' element={ <Home /> }></Route>
+        <Route path='/recent' element={ <Recent /> }></Route>
+        <Route path='/starred' element={ <Starred /> }></Route>
       </Routes>
     </Layout>
   )

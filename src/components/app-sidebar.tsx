@@ -1,4 +1,4 @@
-import { Home, Clock4, Star } from "lucide-react";
+import { Home, Clock4, Star, EllipsisIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 
 import {
@@ -6,8 +6,10 @@ import {
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
+  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
+  SidebarMenuAction,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
@@ -26,9 +28,9 @@ const items = [
     icon: Clock4,
   },
   {
-    title : "Starred",
-    url : "/starred",
-    icon : Star,
+    title: "Starred",
+    url: "/starred",
+    icon: Star,
   },
 ];
 
@@ -41,11 +43,15 @@ export function AppSidebar() {
             <SidebarMenuButton>
               <ProfileHeader />
             </SidebarMenuButton>
+            <SidebarMenuAction>
+              <EllipsisIcon />
+            </SidebarMenuAction>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
+          <SidebarGroupLabel>Main</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (

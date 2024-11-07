@@ -1,35 +1,34 @@
 import Card from "@/components/ui/card";
-import { useState, useEffect } from "react";
+import { Star } from "lucide-react";
 
 interface Note {
-  id: number;
+  id: string;
   title: string;
   content: string;
   isFavorite: boolean;
   createdAt: Date;
   updatedAt: Date;
+  lastVisited: Date;
 }
 
-export default function Starred() {
-  const [notes, setNotes] = useState<Note[]>([]);
-
-  useEffect(() => {
-    fetch("http://localhost:8008/list")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        const favoriteNotes = data.output.filter((note: Note) => note.isFavorite);
-        setNotes(favoriteNotes);
-      });
-  }, []);
+export default function Starred({ notes }: { notes: Note[] }) {
+  const favoriteNotes = notes.filter((note: Note) => note.isFavorite);
 
   return (
-    <div className="flex flex-col gap-6 mx-auto">
-      <h1 className="font-bold text-3xl">Starred</h1>
+    <div className="flex flex-col gap-2">
+      <span className="text-gray-400 flex items-center gap-2">
+        <Star size={20} /> Starred
+      </span>
       {/* Dashboard content */}
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {notes.map((note, i) => (
-            <Card key={i} title={note.title} content={note.content} />
+      <div className="flex border-x gap-4 max-w-screen-lg overflow-x-scroll p-2 whitespace-nowrap">
+        {favoriteNotes.map((note) => (
+          <Card
+            isHorizontal={true}
+            key={note.id}
+            id={note.id}
+            title={note.title}
+            content={note.content}
+          />
         ))}
       </div>
     </div>

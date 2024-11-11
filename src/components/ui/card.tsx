@@ -73,7 +73,7 @@ export default function Card({
           className="flex flex-col w-[200px] h-[150px] rounded-lg outline outline-gray-100 bg-white hover:bg-gray-50 p-6 shadow-md hover:cursor-pointer"
         >
           <h2 className="mb-4 text-xl font-semibold text-ellipsis overflow-hidden line-clamp-1 select-none">
-            {title}
+            {title.slice(0, 25)}
           </h2>
           <p className="text-gray-600 text-ellipsis overflow-hidden line-clamp-2 select-none">
             {textContent.slice(0, 150)}
@@ -85,7 +85,7 @@ export default function Card({
           className="flex flex-col min-w-min h-[150px] rounded-lg outline outline-gray-100 bg-white hover:bg-gray-50 p-6 shadow-md hover:cursor-pointer"
         >
           <h2 className="mb-4 text-xl font-semibold text-ellipsis overflow-hidden line-clamp-1 select-none">
-            {title}
+            {title.slice(0, 25)}
           </h2>
           <p className="text-gray-600 text-ellipsis overflow-hidden line-clamp-2 select-none">
             {textContent.slice(0, 150)}

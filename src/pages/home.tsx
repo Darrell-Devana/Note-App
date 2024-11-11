@@ -37,7 +37,7 @@ export default function Home() {
 
   const toggleFavorite = (id: string) => {
     setNotes((prevNotes) =>
-      prevNotes.map(note => 
+      prevNotes.map((note) =>
         note.id === id ? { ...note, isFavorite: !note.isFavorite } : note
       )
     );
@@ -55,9 +55,17 @@ export default function Home() {
         </Link>
       </div>
       {/* Recent content */}
-      <Recent notes={sortedNotes} deleteNote={deleteNote} toggleFavorite={toggleFavorite} />
+      <Recent
+        notes={sortedNotes}
+        deleteNote={deleteNote}
+        toggleFavorite={toggleFavorite}
+      />
       {/* Starred content */}
-      <Starred notes={sortedNotes} deleteNote={deleteNote} toggleFavorite={toggleFavorite} />
+      <Starred
+        notes={sortedNotes}
+        deleteNote={deleteNote}
+        toggleFavorite={toggleFavorite}
+      />
       {/* Dashboard content */}
       <div className="flex flex-col gap-2">
         <span className="text-gray-400 flex items-center gap-2 select-none">

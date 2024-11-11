@@ -1,14 +1,15 @@
-import { useEffect, useState } from "react";
-import Quill from "quill";
+import { useEffect, useState, useRef } from "react";
+import Quill from "quill/core";
 import "quill/dist/quill.snow.css";
 import "quill/dist/quill.bubble.css";
 import { Link, useNavigate } from "react-router-dom";
 import { House, Save } from "lucide-react";
 import { SaveModal } from "@/components/save-modal";
 
-export default function Editor() {
+export default function NewPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
+  const quillRef = useRef<any>(null);
 
   const toolbarOptions = [
     [{ header: [1, 2, 3, false] }],
@@ -27,13 +28,32 @@ export default function Editor() {
   ];
 
   useEffect(() => {
-    new Quill("#editor", {
+    quillRef.current = new Quill("#editor", {
       modules: {
         toolbar: toolbarOptions,
       },
       placeholder: "Compose something great...",
       theme: "snow",
     });
+
+    quillRef.current.focus();
+
+    // Add event listener for Cmd+S or Ctrl+S to trigger save when Quill is focused
+    const handleKeyDown = (event: any) => {
+      if (quillRef.current && quillRef.current.hasFocus()) {
+        if (event.key === "s" && (event.metaKey || event.ctrlKey)) {
+          event.preventDefault(); // Prevent the default save dialog
+          openSaveModal(); // Trigger save
+        }
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
   }, []);
 
   const openSaveModal = () => {
@@ -41,24 +61,25 @@ export default function Editor() {
   };
 
   const handleSave = (title: string, isFavorite: boolean) => {
-    const quill = document.getElementById("editor");
-
+    const quill = quillRef.current;
     if (quill) {
-      const content = quill.innerHTML;
+      const content = quill.getContents();
+      const textContent = quill.getText();
 
       fetch(import.meta.env.VITE_ADD_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           title,
-          content: content,
+          content,
           isFavorite,
+          textContent,
         }),
       })
-      .then((res) => res.json())
-      .then((data) => {
-        navigate("/edit/" + data.id);
-      })
+        .then((res) => res.json())
+        .then((data) => {
+          navigate("/edit/" + data.id);
+        });
     }
   };
 

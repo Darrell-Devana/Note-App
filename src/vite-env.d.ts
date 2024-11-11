@@ -5,6 +5,8 @@ interface ImportMetaEnv {
     readonly VITE_LIST_URL: string
     readonly VITE_OPEN_URL: string
     readonly VITE_UPDATE_URL: string
+    readonly VITE_DELETE_URL: string
+    readonly VITE_FAVORITE_URL: string
 }
 
 interface ImportMeta {

@@ -50,24 +50,31 @@ export default function Home() {
 
   return (
     <div className="flex flex-col gap-8">
-      <div className="flex justify-between items-center">
-        <h1 className="font-bold text-3xl">Welcome, Darrell Devana</h1>
-
-        <div className="flex items-center gap-2">
-          <input
-            type="search"
-            placeholder="Search notes..."
-            className="w-full bg-gray-100 outline outline-gray-200 rounded-md py-2 px-6"
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-          <Link
-            to={"/new"}
-            className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white text-sm px-2 py-2 rounded-md"
-          >
-            <FilePlus size={20} />
-            <span className="hidden sm:inline text-nowrap">New Note</span>
-          </Link>
+      <div className="flex flex-col gap-4">
+        <div className="flex justify-between items-center">
+          <h1 className="font-bold text-3xl">Welcome, Darrell Devana</h1>
+          <div className="flex items-center gap-2">
+            <input
+              type="search"
+              placeholder="Search notes..."
+              className="hidden sm:inline w-full bg-gray-100 outline outline-gray-200 rounded-md py-2 px-6"
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <Link
+              to={"/new"}
+              className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white text-sm px-2 py-2 rounded-md"
+            >
+              <FilePlus size={20} />
+              <span className="hidden sm:inline text-nowrap">New Note</span>
+            </Link>
+          </div>
         </div>
+        <input
+          type="search"
+          placeholder="Search notes..."
+          className="sm:hidden w-full bg-gray-100 outline outline-gray-200 rounded-md py-2 px-6"
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
       </div>
       {/* Recent content */}
       <Recent
